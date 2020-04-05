@@ -94,7 +94,7 @@
 
 Для корректной работы модуля фильтрации требуется установить зависимости из файла <a href="https://github.com/if1242/MemoryHack/blob/master/filters/requirements.txt">requirements.txt</a>.
 
-# UI 
+# <a href="https://github.com/if1242/MemoryHack/tree/master/UI">UI</a> 
 
 Для удобства демонстрации результата был реализован сайт, на котором можно видеть все выгруженные 
 и классифицированные изображения. Для быстрой реализации был использован <strong>UI-kit MD-Bootstrap</strong>, в который были встроены скрипты на языке <strong>JavaScript</strong>. 
