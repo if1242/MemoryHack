@@ -67,6 +67,43 @@ def load_labels(label_file):
     label.append(l.rstrip())
   return label
 
+def run(file_name):
+    model_file = "tf_files/retrained_graph.pb"
+    label_file = "tf_files/retrained_labels.txt"
+    input_height = 224
+    input_width = 224
+    input_mean = 128
+    input_std = 128
+    input_layer = "input"
+    output_layer = "final_result"
+
+    graph = load_graph(model_file)
+    t = read_tensor_from_image_file(file_name,
+                                    input_height=input_height,
+                                    input_width=input_width,
+                                    input_mean=input_mean,
+                                    input_std=input_std)
+
+    input_name = "import/" + input_layer
+    output_name = "import/" + output_layer
+    input_operation = graph.get_operation_by_name(input_name)
+    output_operation = graph.get_operation_by_name(output_name)
+
+    with tf.Session(graph=graph) as sess:
+        start = time.time()
+        results = sess.run(output_operation.outputs[0],
+                           {input_operation.outputs[0]: t})
+        end = time.time()
+    results = np.squeeze(results)
+
+    top_k = results.argsort()[-5:][::-1]
+    labels = load_labels(label_file)
+
+    print('\nEvaluation time (1-image): {:.3f}s\n'.format(end - start))
+    template = "{} (score={:0.5f})"
+    for i in top_k:
+        print(template.format(labels[i], results[i]))
+
 if __name__ == "__main__":
   file_name = "tf_files/flower_photos/daisy/3475870145_685a19116d.jpg"
   model_file = "tf_files/retrained_graph.pb"
