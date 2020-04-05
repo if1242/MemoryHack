@@ -1,0 +1,11 @@
+selenium
+json
+urllib
+argparse
+codecs
+html
+http
+ssl
+tqdm
+requests
+flickrapi
