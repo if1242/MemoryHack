@@ -1,5 +1,5 @@
 # Google Parser Image
-# Version 0.1
+# Version 0.2
 
 import json
 from urllib.request import urlretrieve
@@ -58,7 +58,8 @@ for element in data_google:
         # print(res)
 
         # cоздаём json файл
-        with open("google_images/" + file_name[:-4] + str(".json"), 'w', encoding='utf8') as json_file:
+        file_name_not_extension, file_extension = os.path.splitext(file_name)
+        with open("google_images/" + file_name_not_extension + str(".json"), 'w', encoding='utf8') as json_file:
             json.dump(data_json, json_file, sort_keys=True, indent=3, separators=(',', ': '), ensure_ascii=False)
 
         print("Загружена картинка №" + str(i))
