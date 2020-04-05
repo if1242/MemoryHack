@@ -1,1 +1,4 @@
+# pip3 install -U -r requirements.txt 
+# or
+# python3 -m pip install -U -r requirements.txt
 shutil
